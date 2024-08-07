@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser } from "react-icons/fa";
-import { MdShoppingCart } from "react-icons/md"; // Import the icon you want to use
-import { AuthContext } from "../../contexts/AuthContext"; // Adjust the path as needed
+import { MdShoppingCart } from "react-icons/md";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Searchbar = ({ CartItem }) => {
   const { userData, isAuthenticated } = useContext(AuthContext);
-  const userRole = (localStorage.getItem('role'));
+  const userRole = localStorage.getItem('role');
   const navigate = useNavigate();
 
   const profileRedirect = () => {
     if (userRole === 'user') {
       navigate('/profile');
-    }   
-     else if (userRole === 'vendor') {
+    } else if (userRole === 'vendor') {
       navigate('/vendor');
     }
   };
@@ -22,8 +21,7 @@ const Searchbar = ({ CartItem }) => {
     <section className="search bg-white text-gray-900 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <div className="logo w-1/4 flex items-center justify-center">
-          <MdShoppingCart className="text-gray-800 text-3xl" />{" "}
-          {/* Replace with your chosen icon */}
+          <MdShoppingCart className="text-gray-800 text-3xl" />
         </div>
 
         <div className="search-box flex items-center space-x-2 border border-gray-300 rounded-full p-2 w-full h-12 bg-gray-100 text-gray-900">
@@ -40,7 +38,12 @@ const Searchbar = ({ CartItem }) => {
           {isAuthenticated ? (
             <div className="flex items-center space-x-4">
               <span className="text-gray-1200 text-xl">Hello</span>
-              <FaUser onClick={profileRedirect} className="text-gray-600 text-2xl cursor-pointer hover:text-gray-800" />
+              <div
+                onClick={profileRedirect}
+                className="p-2 rounded-full bg-blue-700 text-white cursor-pointer hover:bg-blue-700 transition duration-300"
+              >
+                <FaUser className="text-1xl" />
+              </div>
             </div>
           ) : (
             <Link to="/login">

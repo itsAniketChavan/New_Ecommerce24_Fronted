@@ -4,7 +4,21 @@ import Loader from '../../pages/Loader';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const itemsPerPage = 4;
 
- 
+const getStatusStyles = (status) => {
+  switch (status) {
+    case 'processing':
+      return 'border border-yellow-700 bg-yellow-100 text-yellow-700 px-2 py-1 rounded';
+    case 'shipped':
+      return 'border border-blue-700 bg-blue-100 text-blue-700 px-2 py-1 rounded';
+    case 'delivered':
+      return 'border border-green-700 bg-green-100 text-green-700 px-2 py-1 rounded';
+    case 'cancelled':
+      return 'border border-red-700 bg-red-100 text-red-700 px-2 py-1 rounded';
+    default:
+      return 'border border-gray-700 bg-gray-100 text-gray-700 px-2 py-1 rounded';
+  }
+};
+
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,16 +28,15 @@ const MyOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       const storedUserData = JSON.parse(localStorage.getItem('user'));
-      const userId = storedUserData._id
+      const userId = storedUserData._id;
       try {
         setLoading(true);
         const response = await fetch(`${BASE_URL}/api/users/${userId}/orders`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },  
+          },
         });
         const data = await response.json();
-        console.log(data)
         if (data.success) {
           setOrders(data.orders);
         } else {
@@ -82,7 +95,9 @@ const MyOrders = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.orderItems[0].name}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order._id}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.orderStatus}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <span className={getStatusStyles(order.orderStatus)}>{order.orderStatus}</span>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${order.totalPrice.toFixed(2)}</td>
               </tr>
             ))}

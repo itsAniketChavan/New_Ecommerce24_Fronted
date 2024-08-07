@@ -10,6 +10,7 @@ import VendorAllProducts from './VendorAllProducts';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PulseLoader from 'react-spinners/PulseLoader'; // Import the PulseLoader component
 
 // Import local image
 import user from '../../assets/images/user.png'; // Adjust the path as needed
@@ -19,12 +20,12 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const VendorAccount = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const { logout } = useContext(AuthContext);
-  const [vendorData, setVendorData] = useState({ name: '', email: '', avatar:'' });
+  const [vendorData, setVendorData] = useState({ name: '', email: '', avatar: '' });
+  const [loading, setLoading] = useState(false); // State to manage the loading spinner
 
-  // console.log(vendorData)
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem('user'));
-    const userId = storedUserData._id; 
+    const userId = storedUserData._id;
     const fetchVendorData = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/users/${userId}`, {
@@ -36,9 +37,8 @@ const VendorAccount = () => {
         });
 
         const data = await response.json();
-        // console.log(data.user.name)
         if (response.ok) {
-          setVendorData({ name: data.user.name, email: data.user.email, avatar :data.user.avatar });
+          setVendorData({ name: data.user.name, email: data.user.email, avatar: data.user.avatar });
         } else {
           toast.error(data.message || 'Failed to fetch vendor data');
         }
@@ -51,14 +51,24 @@ const VendorAccount = () => {
     fetchVendorData();
   }, []);
 
-  const handleLogout = () => {
-    
-    toast.success('Logout successful');
-     setTimeout(() => {
-      logout();
+  const handleLogout =  () => {
+    setLoading(true); 
+    try {
        
-      setLoading(false); // Set loading to false after logout
-    }, 1000); // 1 second timeout
+     
+      setTimeout(() => {
+         
+        setLoading(false);
+        toast.success('Logout Sucessful.');
+        logout();  
+     
+        
+        
+      }, 1500); 
+    } catch (error) {
+      toast.error('Logout failed. Please try again.');
+      setLoading(false);  
+    }
   };
 
   return (
@@ -72,7 +82,7 @@ const VendorAccount = () => {
             <div className="flex items-center mb-4">
               <img
                 className="w-24 h-24 rounded-full border-4 border-gray-300 object-cover"
-                src={vendorData.avatar.url}
+                src={vendorData.avatar.url || user}
                 alt="Profile"
               />
               <div className="ml-4">
@@ -108,9 +118,9 @@ const VendorAccount = () => {
               <li className="mb-2">
                 <button
                   onClick={() => setActiveTab('allproducts')}
-                  className={`py-3 px-4 text-lg font-medium flex items-center ${activeTab === 'settings' ? 'bg-blue-200 text-blue-900' : 'text-gray-700'} hover:bg-blue-200 hover:text-blue-900 rounded-md transition-colors duration-300 ease-in-out w-full text-left`}
+                  className={`py-3 px-4 text-lg font-medium flex items-center ${activeTab === 'allproducts' ? 'bg-blue-200 text-blue-900' : 'text-gray-700'} hover:bg-blue-200 hover:text-blue-900 rounded-md transition-colors duration-300 ease-in-out w-full text-left`}
                 >
-                  <FiAlignJustify  className="mr-3" /> All Products
+                  <FiAlignJustify className="mr-3" /> All Products
                 </button>
               </li>
               <li className="mb-2">
@@ -132,9 +142,16 @@ const VendorAccount = () => {
             </ul>
             <button
               onClick={handleLogout}
-              className="mt-auto py-3 px-4 text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors duration-300 ease-in-out w-full"
+              className="mt-auto py-3 px-4 text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors duration-300 ease-in-out w-full flex items-center justify-center"
+              disabled={loading} // Disable button while loading
             >
-              <FaSignOutAlt className="mr-3" /> Logout
+              {loading ? (
+                <PulseLoader color="#ffffff" size={10} />
+              ) : (
+                <>
+                  <FaSignOutAlt className="mr-3" /> Logout
+                </>
+              )}
             </button>
           </div>
 
