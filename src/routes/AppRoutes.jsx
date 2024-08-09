@@ -21,7 +21,8 @@ const AppRoutes = () => {
     <Router>
       <Routes>
        
-        {/* Public Routes */}
+        
+     { /*testing*/}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
