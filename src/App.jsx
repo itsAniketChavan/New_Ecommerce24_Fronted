@@ -9,7 +9,6 @@ function App() {
     <AuthProvider>
       <AppRoutes />
       <ToastContainer/>
- 
      </AuthProvider>
  
   );
