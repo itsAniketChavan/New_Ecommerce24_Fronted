@@ -40,7 +40,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="py-0 flex items-center justify-center bg-gray-100">
+    <div className="mb-20 py-0 flex items-center justify-center bg-gray-100">
       <div className="font-[sans-serif] bg-white px-8 lg:max-w-7xl max-w-xl mx-auto mt-20 shadow-2xl rounded-lg">
         <div className="grid lg:grid-cols-3 gap-10 p-10">
           <div className="lg:col-span-2 max-lg:order-1">

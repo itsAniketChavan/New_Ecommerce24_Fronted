@@ -14,18 +14,17 @@ import CheckoutPage from "../pages/CheckoutPage";
 import ProtectedRoute from "../contexts/ProtectedRoute"; // Import ProtectedRoute
 import Unauthorized from "../pages/Unauthorized";
 import NotFoundPage from "../pages/NotFoundPage";
-import ErrorPage from "../pages/ErrorPage"
+import ErrorPage from "../pages/ErrorPage";
+ 
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-       
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/error" element={<ErrorPage />} />
-       
 
         {/* Protected Routes */}
         <Route
@@ -39,23 +38,21 @@ const AppRoutes = () => {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/product/:id" element={<ProductDetails />} />
-                  
-                   
-                  
                   <Route
                     path="/profile"
                     element={
                       <ProtectedRoute roles={["user"]}>
                         <Account />
-                       </ProtectedRoute>
+                      </ProtectedRoute>
                     }
                   />
+                 
                   <Route
                     path="/vendor"
                     element={
                       <ProtectedRoute roles={["vendor"]}>
                         <Vendor />
-                     </ProtectedRoute>  
+                      </ProtectedRoute>
                     }
                   />
                   <Route
@@ -63,19 +60,18 @@ const AppRoutes = () => {
                     element={
                       <ProtectedRoute roles={["user"]}>
                         <CheckoutPage />
-                        </ProtectedRoute>
+                      </ProtectedRoute>
                     }
                   />
-                   <Route path="/*" element={<NotFoundPage />} />
+
+                  {/* Catch-all route for unknown paths */}
+                  <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </main>
               <Footer />
             </>
           }
         />
-
-        
- 
       </Routes>
     </Router>
   );
