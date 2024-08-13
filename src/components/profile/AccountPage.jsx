@@ -79,15 +79,15 @@ const AccountPage = () => {
             <div className="flex items-center mb-4">
               <img
                 className="w-24 h-24 rounded-full border-4 border-gray-300 object-cover"
-                src={user && user.avatar ? user.avatar.url : ""}
+                src={userLogo}
                 alt="Profile"
               />
               <div className="ml-4">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  {user ? user.name : "Loading..."}
+                  {user ? user.name : ""}
                 </h2>
                 <p className="text-gray-700">
-                  {user ? user.email : "Loading..."}
+                  {user ? user.email : ""}
                 </p>
               </div>
             </div>
