@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import PulseLoader from 'react-spinners/PulseLoader'; // Import PulseLoader
+import PulseLoader from "react-spinners/PulseLoader"; // Import PulseLoader
+import { BsCurrencyRupee } from "react-icons/bs";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -25,8 +26,8 @@ const Confirm = ({ shippingDetails, product, amount }) => {
   ];
 
   // Directly access userId from localStorage
-  const storedUserData = JSON.parse(localStorage.getItem('user'));
-  const userId = storedUserData._id; 
+  const storedUserData = JSON.parse(localStorage.getItem("user"));
+  const userId = storedUserData._id;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -86,7 +87,6 @@ const Confirm = ({ shippingDetails, product, amount }) => {
       setTimeout(() => {
         navigate("/");
       }, 2000);
-
     } catch (error) {
       console.error("Error submitting order:", error);
       toast.error("Error submitting order");
@@ -123,14 +123,18 @@ const Confirm = ({ shippingDetails, product, amount }) => {
             {orderSummary.map((item, index) => (
               <li key={index} className="flex flex-wrap gap-4 text-sm">
                 {item.item}{" "}
-                
-                <span className="ml-auto font-bold">
-                  ${item.price.toFixed(2)}
+                <span className="ml-auto font-bold flex items-center">
+                  <BsCurrencyRupee className="mr-1" />
+                  {item.price.toFixed(2)}
                 </span>
               </li>
             ))}
             <li className="flex flex-wrap gap-4 text-sm font-bold border-t-2 pt-4">
-              Total <span className="ml-auto">${totalPrice.toFixed(2)}</span>
+              Total{" "}
+              <span className="ml-auto flex items-center">
+                <BsCurrencyRupee className="mr-1" />
+                {totalPrice.toFixed(2)}
+              </span>
             </li>
           </ul>
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from '../../pages/Loader'; // Adjust the path as needed
 import ErrorPage from '../../pages/ErrorPage'; // Adjust the path as needed
+import { BsCurrencyRupee } from "react-icons/bs";
+
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -90,9 +92,11 @@ const ProductDetails = () => {
             <p className='text-gray-700 text-lg mb-4'>
               {product.description}
             </p>
-            <h6 className='text-3xl font-semibold text-gray-800 mb-4'>
-              ${product.price.toFixed(2)}
-            </h6>
+            <h6 className="text-3xl font-semibold text-gray-800 mb-4 flex items-center">
+  <BsCurrencyRupee className="mr-1" />
+  {product.price.toFixed(2)}
+</h6>
+
             <div className='flex flex-row items-center gap-8'>
               <div className='flex flex-row items-center gap-2'>
                 <button

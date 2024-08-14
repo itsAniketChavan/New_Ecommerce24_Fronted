@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import { BsCurrencyRupee } from "react-icons/bs";
+
+
 
 const ProductCard = ({ id, imageUrl, productName, price, oldPrice, discount, ratings }) => {
   return (
@@ -20,9 +23,11 @@ const ProductCard = ({ id, imageUrl, productName, price, oldPrice, discount, rat
         </Link>
         <div className="mt-2 flex items-center justify-between">
           <div>
-            <span className="text-xl font-bold text-red-400">${price}</span>
+          <span className="text-xl font-bold text-red-400 flex items-center">
+  <BsCurrencyRupee /> {price}
+</span>
             {oldPrice && (
-              <span className="text-sm text-gray-500 line-through ml-2">${oldPrice}</span>
+              <span className="text-sm text-gray-500 line-through ml-2">{oldPrice}</span>
             )}
           </div>
           <div className="flex items-center">

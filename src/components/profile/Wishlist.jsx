@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { BsCurrencyRupee } from 'react-icons/bs'; // Import the Rupee icon
 import wirelessMouse from '../../assets/images/mouse.jpg'; // Adjust the path as needed
 import bluetoothKeyboard from '../../assets/images/keyboard.jpg'; // Adjust the path as needed
 import gamingMonitor from '../../assets/images/monitor.jpg'; // Adjust the path as needed
 
 const Wishlist = () => {
   const sampleWishlistItems = [
-    { id: 1, name: 'Wireless Mouse', image: wirelessMouse, price: '$25' },
-    { id: 2, name: 'Bluetooth Keyboard', image: bluetoothKeyboard, price: '$45' },
-    { id: 3, name: 'Gaming Monitor', image: gamingMonitor, price: '$300' },
-    { id: 4, name: 'Another Item', image: wirelessMouse, price: '$30' },
-    { id: 5, name: 'Yet Another Item', image: bluetoothKeyboard, price: '$40' },
-    { id: 6, name: 'Final Item', image: gamingMonitor, price: '$350' },
+    { id: 1, name: 'Wireless Mouse', image: wirelessMouse, price: 25 },
+    { id: 2, name: 'Bluetooth Keyboard', image: bluetoothKeyboard, price: 45 },
+    { id: 3, name: 'Gaming Monitor', image: gamingMonitor, price: 300 },
+    { id: 4, name: 'Another Item', image: wirelessMouse, price: 30 },
+    { id: 5, name: 'Yet Another Item', image: bluetoothKeyboard, price: 40 },
+    { id: 6, name: 'Final Item', image: gamingMonitor, price: 350 },
   ];
 
   const itemsPerPage = 3;
@@ -28,7 +29,7 @@ const Wishlist = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {currentItems.length === 0 ? (
-          <p className="text-gray-700">Your wishlist is empty.</p>
+          <p className="text-gray-700 col-span-full">Your wishlist is empty.</p>
         ) : (
           currentItems.map((item) => (
             <div
@@ -42,7 +43,10 @@ const Wishlist = () => {
               />
               <div className="p-4">
                 <p className="text-lg font-semibold text-gray-800">{item.name}</p>
-                <p className="text-sm text-gray-600">{item.price}</p>
+                <p className="text-sm text-gray-600 flex items-center">
+                  <BsCurrencyRupee className="mr-1" />
+                  {item.price}
+                </p>
               </div>
               <div className="p-4 border-t border-gray-200">
                 <button className="text-blue-600 hover:underline">Remove</button>

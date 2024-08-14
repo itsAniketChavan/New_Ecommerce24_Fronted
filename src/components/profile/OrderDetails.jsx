@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsCurrencyRupee } from 'react-icons/bs';
 
 const OrderDetails = ({ order }) => {
   if (!order) return <p>No order found</p>;
@@ -16,10 +17,18 @@ const OrderDetails = ({ order }) => {
           <p className="text-gray-700">Paid At: {new Date(order.paidAt).toLocaleDateString()}</p>
         </div>
         <div>
-          <p className="text-gray-700">Items Price: ${order.itemsPrice.toFixed(2)}</p>
-          <p className="text-gray-700">Shipping Price: ${order.shippingPrice.toFixed(2)}</p>
-          <p className="text-gray-700">Tax Price: ${order.taxPrice.toFixed(2)}</p>
-          <p className="text-gray-700">Total Price: ${order.totalPrice.toFixed(2)}</p>
+          <p className="text-gray-700 flex items-center">
+            Items Price: <BsCurrencyRupee className="ml-2 mr-1" />{order.itemsPrice.toFixed(2)}
+          </p>
+          <p className="text-gray-700 flex items-center">
+            Shipping Price: <BsCurrencyRupee className="ml-2 mr-1" />{order.shippingPrice.toFixed(2)}
+          </p>
+          <p className="text-gray-700 flex items-center">
+            Tax Price: <BsCurrencyRupee className="ml-2 mr-1" />{order.taxPrice.toFixed(2)}
+          </p>
+          <p className="text-gray-700 flex items-center">
+            Total Price: <BsCurrencyRupee className="ml-2 mr-1" />{order.totalPrice.toFixed(2)}
+          </p>
         </div>
       </div>
 
@@ -38,7 +47,9 @@ const OrderDetails = ({ order }) => {
         {order.orderItems.map(item => (
           <li key={item._id} className="py-4 flex items-center border-b border-gray-200">
             <img src={item.image} alt={item.name} className="w-16 h-16 object-cover" />
-            <span className="ml-4">{item.name} - ${item.price.toFixed(2)}</span>
+            <span className="ml-4 flex items-center">
+              {item.name} - <BsCurrencyRupee className="ml-2 mr-1" />{item.price.toFixed(2)}
+            </span>
           </li>
         ))}
       </ul>

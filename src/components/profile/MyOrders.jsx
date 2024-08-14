@@ -1,6 +1,7 @@
   import React, { useState, useEffect } from 'react';
   import Loader from '../../pages/Loader';
   import OrderDetails from './OrderDetails';
+  import { BsCurrencyRupee } from 'react-icons/bs';
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const itemsPerPage = 4;
@@ -131,7 +132,7 @@
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <span className={getStatusStyles(order.orderStatus)}>{order.orderStatus}</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${order.totalPrice.toFixed(2)}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.totalPrice.toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>

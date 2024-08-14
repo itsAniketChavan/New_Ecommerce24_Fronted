@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import { MdFlag, MdLanguage } from 'react-icons/md';
-import { BsCurrencyDollar } from 'react-icons/bs';
+import { BsCurrencyRupee } from "react-icons/bs";
 
 const Head = () => {
   return (
@@ -10,7 +10,7 @@ const Head = () => {
         <div className="flex space-x-4">
           <div className="flex items-center space-x-2 cursor-pointer hover:underline">
             <FaPhoneAlt className="text-xl" />
-            <span>+88012 3456 7894</span>
+            <span>+91 7219390817</span>
           </div>
           <div className="flex items-center space-x-2 cursor-pointer hover:underline">
             <FaEnvelope className="text-xl" />
@@ -23,8 +23,8 @@ const Head = () => {
           <MdFlag className="text-xl cursor-pointer hover:text-gray-300" />
           <span className="cursor-pointer hover:underline">EN</span>
           <MdLanguage className="text-xl cursor-pointer hover:text-gray-300" />
-          <BsCurrencyDollar className="text-xl cursor-pointer hover:text-gray-300" />
-          <span className="cursor-pointer hover:underline">USD</span>
+          <BsCurrencyRupee className="text-xl cursor-pointer hover:text-gray-300" />
+          <span className="cursor-pointer hover:underline">INR</span>
         </div>
       </div>
     </section>

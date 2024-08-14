@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Information */}
           <div>
-            <h2 className="text-2xl text-red-500 font-bold mb-4">Bonik</h2>
+            <h2 className="text-2xl text-red-500 font-bold mb-4">Ecommerce</h2>
             <p className="mb-6">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
               libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat
@@ -108,7 +108,7 @@ const Footer = () => {
                   support@ui-lib.com
                 </a>
               </li>
-              <li>Phone: +88012 3456 7894</li>
+              <li>Phone: +91 7219390817</li>
             </ul>
           </div>
         </div>
